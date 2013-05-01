@@ -3,6 +3,10 @@ module Raddocs
     set :haml, :format => :html5
     set :root, File.join(File.dirname(__FILE__), "..")
 
+    use Rack::Auth::Basic, "Protected Area" do |username, password|
+      username == DOC_NAME && password == DOC_PASS
+    end
+
     get "/" do
       index = JSON.parse(File.read("#{docs_dir}/index.json"))
       haml :index, :locals => { :index => index }
