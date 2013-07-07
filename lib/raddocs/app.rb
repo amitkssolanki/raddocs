@@ -7,7 +7,7 @@ module Raddocs
       username == DOC_NAME && password == DOC_PASS
     end
 
-    get "/" do
+    get "/index" do
       index = JSON.parse(File.read("#{docs_dir}/index.json"))
       haml :index, :locals => { :index => index }
     end
